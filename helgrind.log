@@ -1,165 +1,59 @@
-==49967== Helgrind, a thread error detector
-==49967== Copyright (C) 2007-2017, and GNU GPL'd, by OpenWorks LLP et al.
-==49967== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
-==49967== Command: ./philo 5 800 200 200 2
-==49967== 
-==49967== ---Thread-Announcement------------------------------------------
-==49967== 
-==49967== Thread #6 was created
-==49967==    at 0x49A7A53: clone (clone.S:76)
-==49967==    by 0x49A7BD2: __clone_internal_fallback (clone-internal.c:64)
-==49967==    by 0x49A7BD2: __clone_internal (clone-internal.c:109)
-==49967==    by 0x491A54F: create_thread (pthread_create.c:297)
-==49967==    by 0x491B1A4: pthread_create@@GLIBC_2.34 (pthread_create.c:836)
-==49967==    by 0x4854975: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x10963F: init_philosophers (philo.c:67)
-==49967==    by 0x109874: main (philo.c:108)
-==49967== 
-==49967== ----------------------------------------------------------------
-==49967== 
-==49967== Thread #6 unlocked a not-locked lock at 0x1FFEFF8A60
-==49967==    at 0x4851A2D: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x109BB1: eat (actions.c:25)
-==49967==    by 0x109F91: philo_routine (routine.c:53)
-==49967==    by 0x4854B7A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x491AAA3: start_thread (pthread_create.c:447)
-==49967==    by 0x49A7A63: clone (clone.S:100)
-==49967==  Lock at 0x1FFEFF8A60 was first observed
-==49967==    at 0x48562EB: pthread_mutex_init (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x109310: init_forks (philo.c:22)
-==49967==    by 0x10984D: main (philo.c:106)
-==49967==  Address 0x1ffeff8a60 is on thread #1's stack
-==49967==  in frame #3, created by main (philo.c:96)
-==49967== 
-==49967== 
-==49967== ----------------------------------------------------------------
-==49967== 
-==49967== Thread #6 unlocked a not-locked lock at 0x1FFEFF89C0
-==49967==    at 0x4851A2D: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x109BC1: eat (actions.c:26)
-==49967==    by 0x109F91: philo_routine (routine.c:53)
-==49967==    by 0x4854B7A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x491AAA3: start_thread (pthread_create.c:447)
-==49967==    by 0x49A7A63: clone (clone.S:100)
-==49967==  Lock at 0x1FFEFF89C0 was first observed
-==49967==    at 0x48562EB: pthread_mutex_init (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x109310: init_forks (philo.c:22)
-==49967==    by 0x10984D: main (philo.c:106)
-==49967==  Address 0x1ffeff89c0 is on thread #1's stack
-==49967==  in frame #3, created by main (philo.c:96)
-==49967== 
-==49967== 
-==49967== ---Thread-Announcement------------------------------------------
-==49967== 
-==49967== Thread #4 was created
-==49967==    at 0x49A7A53: clone (clone.S:76)
-==49967==    by 0x49A7BD2: __clone_internal_fallback (clone-internal.c:64)
-==49967==    by 0x49A7BD2: __clone_internal (clone-internal.c:109)
-==49967==    by 0x491A54F: create_thread (pthread_create.c:297)
-==49967==    by 0x491B1A4: pthread_create@@GLIBC_2.34 (pthread_create.c:836)
-==49967==    by 0x4854975: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x10963F: init_philosophers (philo.c:67)
-==49967==    by 0x109874: main (philo.c:108)
-==49967== 
-==49967== ----------------------------------------------------------------
-==49967== 
-==49967== Thread #4 unlocked a not-locked lock at 0x1FFEFF8A10
-==49967==    at 0x4851A2D: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x109BB1: eat (actions.c:25)
-==49967==    by 0x109F91: philo_routine (routine.c:53)
-==49967==    by 0x4854B7A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x491AAA3: start_thread (pthread_create.c:447)
-==49967==    by 0x49A7A63: clone (clone.S:100)
-==49967==  Lock at 0x1FFEFF8A10 was first observed
-==49967==    at 0x48562EB: pthread_mutex_init (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x109310: init_forks (philo.c:22)
-==49967==    by 0x10984D: main (philo.c:106)
-==49967==  Address 0x1ffeff8a10 is on thread #1's stack
-==49967==  in frame #4, created by main (philo.c:96)
-==49967== 
-==49967== 
-==49967== ----------------------------------------------------------------
-==49967== 
-==49967== Thread #4 unlocked a not-locked lock at 0x1FFEFF8A38
-==49967==    at 0x4851A2D: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x109BC1: eat (actions.c:26)
-==49967==    by 0x109F91: philo_routine (routine.c:53)
-==49967==    by 0x4854B7A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x491AAA3: start_thread (pthread_create.c:447)
-==49967==    by 0x49A7A63: clone (clone.S:100)
-==49967==  Lock at 0x1FFEFF8A38 was first observed
-==49967==    at 0x48562EB: pthread_mutex_init (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x109310: init_forks (philo.c:22)
-==49967==    by 0x10984D: main (philo.c:106)
-==49967==  Address 0x1ffeff8a38 is on thread #1's stack
-==49967==  in frame #4, created by main (philo.c:96)
-==49967== 
-==49967== 
-==49967== ---Thread-Announcement------------------------------------------
-==49967== 
-==49967== Thread #1 is the program's root thread
-==49967== 
-==49967== ----------------------------------------------------------------
-==49967== 
-==49967== Thread #1's call to pthread_mutex_destroy failed
-==49967==    with error code 16 (EBUSY: Device or resource busy)
-==49967==    at 0x4851148: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
-==49967==    by 0x10A338: close_simulation (finalization_checks.c:27)
-==49967==    by 0x10991E: main (philo.c:118)
-==49967== 
-14 1 has taken a fork
-18 1 has taken a fork
-19 1 is eating
-22 3 has taken a fork
-22 3 has taken a fork
-22 3 is eating
+==53154== Helgrind, a thread error detector
+==53154== Copyright (C) 2007-2017, and GNU GPL'd, by OpenWorks LLP et al.
+==53154== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==53154== Command: ./philo 5 800 200 200 2
+==53154== 
+16 1 has taken a fork
+20 1 has taken a fork
+20 1 is eating
+23 3 has taken a fork
+24 3 has taken a fork
+24 3 is eating
 220 1 is sleeping
 221 5 has taken a fork
 221 5 has taken a fork
 222 5 is eating
-222 3 is sleeping
-223 2 has taken a fork
+222 2 has taken a fork
+224 3 is sleeping
+224 4 has taken a fork
 224 2 has taken a fork
-224 2 is eating
-226 4 has taken a fork
+225 2 is eating
+421 1 is thinking
 422 5 is sleeping
-423 1 is thinking
+422 4 has taken a fork
+422 4 is eating
 424 3 is thinking
-425 4 has taken a fork
-425 4 is eating
-426 2 is sleeping
-427 1 has taken a fork
-427 1 has taken a fork
-428 1 is eating
-622 5 is thinking
-625 4 is sleeping
-626 2 is thinking
-627 3 has taken a fork
-627 3 has taken a fork
-628 3 is eating
-628 1 is sleeping
-631 2 has taken a fork
-632 5 has taken a fork
-632 5 has taken a fork
-632 5 is eating
-826 4 is thinking
-828 1 is thinking
-829 3 is sleeping
-830 2 has taken a fork
-830 2 is eating
-832 4 has taken a fork
-834 5 is sleeping
-834 4 has taken a fork
-835 4 is eating
-1031 2 is sleeping
-1032 1 has taken a fork
-1032 1 has taken a fork
-1032 1 is eating
-1033 3 is thinking
-1034 5 is thinking
-1036 4 is sleeping
-==49967== 
-==49967== Use --history-level=approx or =none to gain increased speed, at
-==49967== the cost of reduced accuracy of conflicting-access information
-==49967== For lists of detected and suppressed errors, rerun with: -s
-==49967== ERROR SUMMARY: 8 errors from 5 contexts (suppressed: 35891 from 142)
+425 2 is sleeping
+426 1 has taken a fork
+426 1 has taken a fork
+426 1 is eating
+622 4 is sleeping
+622 3 has taken a fork
+622 3 has taken a fork
+622 3 is eating
+623 5 is thinking
+625 2 is thinking
+626 1 is sleeping
+627 2 has taken a fork
+627 5 has taken a fork
+627 5 has taken a fork
+627 5 is eating
+822 4 is thinking
+823 3 is sleeping
+823 4 has taken a fork
+823 2 has taken a fork
+824 2 is eating
+826 1 is thinking
+829 5 is sleeping
+829 4 has taken a fork
+829 4 is eating
+1023 3 is thinking
+1024 2 is sleeping
+1030 4 is sleeping
+1030 5 is thinking
+1
+==53154== 
+==53154== Use --history-level=approx or =none to gain increased speed, at
+==53154== the cost of reduced accuracy of conflicting-access information
+==53154== For lists of detected and suppressed errors, rerun with: -s
+==53154== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 80077 from 156)

@@ -6,13 +6,13 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:54:36 by anagarri          #+#    #+#             */
-/*   Updated: 2025/10/07 16:23:31 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/10/07 17:53:55 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* MONITORING ROUTINE 🕵️*/
+/* MONITORING ROUTINE*/
 
 void	*monitor_routine(void *arg)
 {
@@ -27,6 +27,7 @@ void	*monitor_routine(void *arg)
 			return (NULL);
 		if (check_if_all_ate(data))
 		{
+			//printf("%i\n", check_if_all_ate(data));
 			pthread_mutex_lock(&data->death_mutex);
 			if (!data->philo_dead)
 				data->simulation_is_completed = 1;
@@ -38,9 +39,32 @@ void	*monitor_routine(void *arg)
 	return (NULL);
 }
 
-/*PHILOSOPHER'S ROUTINE 🧠*/
+/*PHILOSOPHER'S ROUTINE*/
 
 void	*philo_routine(void *arg)
+{
+	t_philo	*philo;
+	int		done;
+	
+	philo = (t_philo *)arg;
+	while (!simulation_finished(philo->data))
+	{
+		pthread_mutex_lock(&philo->meals_mutex);
+		done = (philo->data->num_time_must_eat > 0
+				&& philo->meals_count >= philo->data->num_time_must_eat);
+		pthread_mutex_unlock(&philo->meals_mutex);
+		if (done)
+			break ;
+		if (take_forks(philo))
+			eat(philo);
+		print_locked(philo, "is sleeping");
+		ft_usleep(philo->data->time_to_sleep, philo->data);
+		print_locked(philo, "is thinking");
+	}
+	return (NULL);
+}
+
+/* void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
 
@@ -56,4 +80,4 @@ void	*philo_routine(void *arg)
 		print_locked(philo, "is thinking");
 	}
 	return (NULL);
-}
+} */

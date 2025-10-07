@@ -1,83 +1,57 @@
-==49975== drd, a thread error detector
-==49975== Copyright (C) 2006-2020, and GNU GPL'd, by Bart Van Assche.
-==49975== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
-==49975== Command: ./philo 5 800 200 200 2
-==49975== 
-==49975== Thread 4:
-==49975== Mutex not locked by calling thread: mutex 0x1ffeff8a20, recursion count 0, owner 3.
-==49975==    at 0x48602FF: pthread_mutex_unlock@* (in /usr/libexec/valgrind/vgpreload_drd-amd64-linux.so)
-==49975==    by 0x109BB1: eat (actions.c:25)
-==49975==    by 0x109F91: philo_routine (routine.c:53)
-==49975==    by 0x48558B8: ??? (in /usr/libexec/valgrind/vgpreload_drd-amd64-linux.so)
-==49975==    by 0x493DAA3: start_thread (pthread_create.c:447)
-==49975==    by 0x49CAA63: clone (clone.S:100)
-==49975== mutex 0x1ffeff8a20 was first observed at:
-==49975==    at 0x485A71D: pthread_mutex_init@* (in /usr/libexec/valgrind/vgpreload_drd-amd64-linux.so)
-==49975==    by 0x109310: init_forks (philo.c:22)
-==49975==    by 0x10984D: main (philo.c:106)
-==49975== 
-==49975== Mutex not locked by calling thread: mutex 0x1ffeff8a48, recursion count 0, owner 4.
-==49975==    at 0x48602FF: pthread_mutex_unlock@* (in /usr/libexec/valgrind/vgpreload_drd-amd64-linux.so)
-==49975==    by 0x109BC1: eat (actions.c:26)
-==49975==    by 0x109F91: philo_routine (routine.c:53)
-==49975==    by 0x48558B8: ??? (in /usr/libexec/valgrind/vgpreload_drd-amd64-linux.so)
-==49975==    by 0x493DAA3: start_thread (pthread_create.c:447)
-==49975==    by 0x49CAA63: clone (clone.S:100)
-==49975== mutex 0x1ffeff8a48 was first observed at:
-==49975==    at 0x485A71D: pthread_mutex_init@* (in /usr/libexec/valgrind/vgpreload_drd-amd64-linux.so)
-==49975==    by 0x109310: init_forks (philo.c:22)
-==49975==    by 0x10984D: main (philo.c:106)
-==49975== 
-37 1 has taken a fork
+==53161== drd, a thread error detector
+==53161== Copyright (C) 2006-2020, and GNU GPL'd, by Bart Van Assche.
+==53161== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==53161== Command: ./philo 5 800 200 200 2
+==53161== 
 42 1 has taken a fork
-43 1 is eating
-52 3 has taken a fork
-52 3 has taken a fork
-52 3 is eating
-243 1 is sleeping
-244 5 has taken a fork
-244 5 has taken a fork
-244 5 is eating
-245 2 has taken a fork
-252 3 is sleeping
-252 2 has taken a fork
-252 2 is eating
-253 4 has taken a fork
-443 1 is thinking
-444 5 is sleeping
-446 4 has taken a fork
-446 4 is eating
-452 3 is thinking
-454 2 is sleeping
-455 1 has taken a fork
-456 1 has taken a fork
-456 1 is eating
-644 5 is thinking
-646 4 is sleeping
-648 3 has taken a fork
-648 3 has taken a fork
-648 3 is eating
-655 2 is thinking
-656 1 is sleeping
+47 1 has taken a fork
+47 1 is eating
+57 3 has taken a fork
+57 3 has taken a fork
+57 3 is eating
+248 1 is sleeping
+248 5 has taken a fork
+248 5 has taken a fork
+248 5 is eating
+249 2 has taken a fork
+257 2 has taken a fork
+257 2 is eating
+257 3 is sleeping
+258 4 has taken a fork
+448 5 is sleeping
+448 1 is thinking
+449 4 has taken a fork
+449 4 is eating
+457 2 is sleeping
+457 1 has taken a fork
+457 1 has taken a fork
+457 1 is eating
+458 3 is thinking
+648 5 is thinking
+649 4 is sleeping
+649 3 has taken a fork
+649 3 has taken a fork
+650 3 is eating
+657 2 is thinking
+658 1 is sleeping
 658 2 has taken a fork
 659 5 has taken a fork
 659 5 has taken a fork
 659 5 is eating
-846 4 is thinking
-848 3 is sleeping
-849 4 has taken a fork
-849 2 has taken a fork
-849 2 is eating
-856 1 is thinking
-859 5 is sleeping
-859 4 has taken a fork
-859 4 is eating
-1048 3 is thinking
-1050 2 is sleeping
-1050 1 has taken a fork
-1050 1 has taken a fork
-1051 1 is eating
-1059 4 is sleeping
-==49975== 
-==49975== For lists of detected and suppressed errors, rerun with: -s
-==49975== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 13 from 5)
+849 4 is thinking
+850 2 has taken a fork
+850 2 is eating
+851 3 is sleeping
+852 4 has taken a fork
+858 1 is thinking
+860 5 is sleeping
+861 4 has taken a fork
+861 4 is eating
+1051 2 is sleeping
+1051 3 is thinking
+1060 5 is thinking
+1061 4 is sleeping
+1
+==53161== 
+==53161== For lists of detected and suppressed errors, rerun with: -s
+==53161== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 13 from 5)
