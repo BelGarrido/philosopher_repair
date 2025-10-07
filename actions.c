@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:26:11 by anagarri          #+#    #+#             */
-/*   Updated: 2025/10/07 15:09:48 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/10/07 15:35:36 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,53 @@ void	one_filosopher_routine(t_philo *philo)
 void	take_forks(t_philo *philo)
 {
 	if (philo->data->num_philos == 1)
+		return (one_filosopher_routine(philo));
+	if (simulation_finished(philo->data))
+		return ;
+	if (philo->id % 2 == 0)
+		usleep(100);
+
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_lock(philo->r_fork);
+		print_locked(philo, "has taken a fork");
+		if (simulation_finished(philo->data))
+		{
+			pthread_mutex_unlock(philo->r_fork);
+			return ;
+		}
+		pthread_mutex_lock(philo->l_fork);
+		print_locked(philo, "has taken a fork");
+		if (simulation_finished(philo->data))
+		{
+			pthread_mutex_unlock(philo->r_fork);
+			pthread_mutex_unlock(philo->l_fork);
+			return ;
+		}
+	}
+	else
+	{
+		pthread_mutex_lock(philo->l_fork);
+		print_locked(philo, "has taken a fork");
+		if (simulation_finished(philo->data))
+		{
+			pthread_mutex_unlock(philo->l_fork);
+			return ;
+		}
+		pthread_mutex_lock(philo->r_fork);
+		print_locked(philo, "has taken a fork");
+		if (simulation_finished(philo->data))
+		{
+			pthread_mutex_unlock(philo->r_fork);
+			pthread_mutex_unlock(philo->l_fork);
+			return ;
+		}
+	}
+}
+
+/* void	take_forks(t_philo *philo)
+{
+	if (philo->data->num_philos == 1)
 	{
 		return (one_filosopher_routine(philo));
 	}
@@ -66,4 +113,4 @@ void	take_forks(t_philo *philo)
 		pthread_mutex_lock(philo->r_fork);
 		print_locked(philo, "has taken a fork");
 	}
-}
+} */

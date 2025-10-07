@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 13:30:25 by anagarri          #+#    #+#             */
-/*   Updated: 2025/10/07 14:50:36 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/10/07 16:06:54 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,21 @@ int	check_if_all_ate(t_data *data)
 {
 	int	i;
 	int	meals_count;
-
+	int all_ate;
 	if (data->num_time_must_eat == 0)
 		return (0);
+	all_ate = 1;
 	i = 0;
 	while (i < data->num_philos)
 	{
-		pthread_mutex_lock(&data->monitor_mutex);
+		pthread_mutex_lock(&data->philosophers[i].meals_mutex);
 		meals_count = data->philosophers[i].meals_count;
-		pthread_mutex_unlock(&data->monitor_mutex);
+		pthread_mutex_unlock(&data->philosophers[i].meals_mutex);
 		if (meals_count < data->num_time_must_eat)
-			return (0);
+			all_ate = 0;
 		i++;
 	}
-	return (1);
+	return (all_ate);
 }
 
 int	any_philo_dead(t_data *data)
