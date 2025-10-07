@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   finalization_checks.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anagarri <anagarri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 13:30:25 by anagarri          #+#    #+#             */
-/*   Updated: 2025/10/06 13:39:35 by anagarri         ###   ########.fr       */
+/*   Updated: 2025/10/07 14:50:36 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	close_simulation(t_data *data)
 	while (i < data->num_philos)
 	{
 		pthread_mutex_destroy(&data->forks[i]);
+		pthread_mutex_destroy(&data->philosophers[i].meals_mutex);
 		i++;
 	}
 	return (0);
@@ -47,9 +48,9 @@ static int	philo_is_dead(t_data *data, int i)
 	long	ts;
 	int		time_since_meal;
 
-	pthread_mutex_lock(&data->monitor_mutex);
+	pthread_mutex_lock(&data->philosophers[i].meals_mutex);
 	time_since_meal = get_time_ms() - data->philosophers[i].last_meal_time;
-	pthread_mutex_unlock(&data->monitor_mutex);
+	pthread_mutex_unlock(&data->philosophers[i].meals_mutex);
 	if (time_since_meal > data->time_to_die)
 	{
 		pthread_mutex_lock(&data->death_mutex);

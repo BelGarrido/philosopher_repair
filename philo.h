@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:31:49 by anagarri          #+#    #+#             */
-/*   Updated: 2025/10/07 14:21:57 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/10/07 14:41:52 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		check_if_all_ate(t_data *data);
 /* utils.c */
 long	get_timestamp(long start_time); // utils.c
 long	get_time_ms(void); // utils.c
-void	ft_usleep(long int miliseconds); // utils.c
+void	ft_usleep(long time, t_data *data); // utils.c
 void	print_locked(t_philo *philo, char *msg); // utils.c
 
 #endif

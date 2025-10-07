@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anagarri <anagarri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:26:11 by anagarri          #+#    #+#             */
-/*   Updated: 2025/10/06 13:40:37 by anagarri         ###   ########.fr       */
+/*   Updated: 2025/10/07 15:09:48 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	eat(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->monitor_mutex);
+	pthread_mutex_lock(&philo->meals_mutex);
 	philo->last_meal_time = get_time_ms();
-	pthread_mutex_unlock(&philo->data->monitor_mutex);
+	pthread_mutex_unlock(&philo->meals_mutex);
 	print_locked(philo, "is eating");
-	ft_usleep(philo->data->time_to_eat);
-	pthread_mutex_lock(&philo->data->monitor_mutex);
+	ft_usleep(philo->data->time_to_eat, philo->data);
+	pthread_mutex_lock(&philo->meals_mutex);
 	philo->meals_count++;
-	pthread_mutex_unlock(&philo->data->monitor_mutex);
+	pthread_mutex_unlock(&philo->meals_mutex);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
 }
@@ -30,7 +30,7 @@ void	one_filosopher_routine(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
 	print_locked(philo, "has taken a fork");
-	ft_usleep(philo->data->time_to_die);
+	ft_usleep(philo->data->time_to_die, philo->data);
 	if (!simulation_finished(philo->data))
 	{
 		pthread_mutex_lock(&philo->data->death_mutex);
@@ -48,12 +48,11 @@ void	take_forks(t_philo *philo)
 {
 	if (philo->data->num_philos == 1)
 	{
-		one_filosopher_routine(philo);
-		return ;
+		return (one_filosopher_routine(philo));
 	}
 	if (simulation_finished(philo->data))
 		return ;
-	else if ((philo->id % 2) == 0)
+	if ((philo->id % 2) == 0)
 	{
 		pthread_mutex_lock(philo->r_fork);
 		print_locked(philo, "has taken a fork");

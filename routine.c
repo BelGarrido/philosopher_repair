@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anagarri <anagarri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:54:36 by anagarri          #+#    #+#             */
-/*   Updated: 2025/10/06 13:39:50 by anagarri         ###   ########.fr       */
+/*   Updated: 2025/10/07 14:42:28 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*philo_routine(void *arg)
 		take_forks(philo);
 		eat(philo);
 		print_locked(philo, "is sleeping");
-		ft_usleep(philo->data->time_to_sleep);
+		ft_usleep(philo->data->time_to_sleep, philo->data);
 		print_locked(philo, "is thinking");
 	}
 	return (NULL);
