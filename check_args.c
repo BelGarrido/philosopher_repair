@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:54:24 by anagarri          #+#    #+#             */
-/*   Updated: 2025/10/07 17:50:32 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/10/07 18:09:33 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	ft_atoi(const char *s)
 	i = 0;
 	neg = 1;
 	number = 0;
-	
 	while ((s[i] >= 9 && s[i] <= 13) || s[i] == 32)
 		i++;
 	if (s [i] == '+' || s[i] == '-')
@@ -58,12 +57,14 @@ int	ft_atoi(const char *s)
 
 int	check_value(char *value_str, int min, int max, char *msg)
 {
-	if(!ft_isnum(value_str))
+	int	value;
+
+	if (!ft_isnum(value_str))
 	{
 		fprintf(stderr, "Error: Invalid %s\n", msg);
 		return (0);
-	}	
-	int value = ft_atoi(value_str);
+	}
+	value = ft_atoi(value_str);
 	if (value < min || (max > 0 && value > max))
 	{
 		fprintf(stderr, "Error: Invalid %s\n", msg);
@@ -79,7 +80,7 @@ int	check_valid_argument(char **argv, int argc)
 		fprintf(stderr, "Error: Invalid number or arguments\n");
 		return (0);
 	}
-	if(argv[1] && argv[2] && argv[3] && argv[4])
+	if (argv[1] && argv[2] && argv[3] && argv[4])
 	{
 		if (!check_value(argv[1], 1, 200, "num_philos"))
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:54:49 by anagarri          #+#    #+#             */
-/*   Updated: 2025/10/07 14:41:00 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/10/07 18:11:26 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	ft_usleep(long time, t_data *data)
 		if ((get_time_ms() - start) < time)
 			usleep(100);
 		else
-			break;
-	}	
+			break ;
+	}
 }

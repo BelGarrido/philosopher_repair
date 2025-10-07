@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:54:36 by anagarri          #+#    #+#             */
-/*   Updated: 2025/10/07 17:53:55 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/10/07 18:11:59 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	*monitor_routine(void *arg)
 			return (NULL);
 		if (check_if_all_ate(data))
 		{
-			//printf("%i\n", check_if_all_ate(data));
 			pthread_mutex_lock(&data->death_mutex);
 			if (!data->philo_dead)
 				data->simulation_is_completed = 1;
@@ -45,7 +44,7 @@ void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
 	int		done;
-	
+
 	philo = (t_philo *)arg;
 	while (!simulation_finished(philo->data))
 	{

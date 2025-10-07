@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:26:11 by anagarri          #+#    #+#             */
-/*   Updated: 2025/10/07 16:23:02 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/10/07 18:27:53 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,53 +44,47 @@ void	one_filosopher_routine(t_philo *philo)
 	pthread_mutex_unlock(philo->r_fork);
 }
 
+int	fork_is_taken(pthread_mutex_t *first, pthread_mutex_t *second,
+		t_philo *philo)
+{
+	pthread_mutex_lock(first);
+	print_locked(philo, "has taken a fork");
+	if (simulation_finished(philo->data))
+	{
+		pthread_mutex_unlock(first);
+		return (0);
+	}
+	pthread_mutex_lock(second);
+	print_locked(philo, "has taken a fork");
+	if (simulation_finished(philo->data))
+	{
+		pthread_mutex_unlock(first);
+		pthread_mutex_unlock(second);
+		return (0);
+	}
+	return (1);
+}
+
 int	take_forks(t_philo *philo)
 {
 	if (philo->data->num_philos == 1)
 	{
 		one_filosopher_routine(philo);
-		return 0;
+		return (0);
 	}
 	if (simulation_finished(philo->data))
-		return 0;
+		return (0);
 	if (philo->id % 2 == 0)
 		usleep(100);
-
 	if (philo->id % 2 == 0)
 	{
-		pthread_mutex_lock(philo->r_fork);
-		print_locked(philo, "has taken a fork");
-		if (simulation_finished(philo->data))
-		{
-			pthread_mutex_unlock(philo->r_fork);
-			return 0;
-		}
-		pthread_mutex_lock(philo->l_fork);
-		print_locked(philo, "has taken a fork");
-		if (simulation_finished(philo->data))
-		{
-			pthread_mutex_unlock(philo->r_fork);
-			pthread_mutex_unlock(philo->l_fork);
-			return 0;
-		}
+		if (!fork_is_taken(philo->r_fork, philo->l_fork, philo))
+			return (0);
 	}
 	else
 	{
-		pthread_mutex_lock(philo->l_fork);
-		print_locked(philo, "has taken a fork");
-		if (simulation_finished(philo->data))
-		{
-			pthread_mutex_unlock(philo->l_fork);
-			return 0;
-		}
-		pthread_mutex_lock(philo->r_fork);
-		print_locked(philo, "has taken a fork");
-		if (simulation_finished(philo->data))
-		{
-			pthread_mutex_unlock(philo->r_fork);
-			pthread_mutex_unlock(philo->l_fork);
-			return 0;
-		}
+		if (!fork_is_taken(philo->l_fork, philo->r_fork, philo))
+			return (0);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 13:30:25 by anagarri          #+#    #+#             */
-/*   Updated: 2025/10/07 16:45:08 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/10/07 18:13:31 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	check_if_all_ate(t_data *data)
 {
 	int	i;
 	int	meals_count;
-	int all_ate;
+	int	all_ate;
+
 	if (data->num_time_must_eat == 0)
 		return (0);
 	all_ate = 1;
