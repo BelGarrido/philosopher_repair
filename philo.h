@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:31:49 by anagarri          #+#    #+#             */
-/*   Updated: 2025/10/07 14:41:52 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/10/07 16:26:32 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		ft_atoi(const char *s); // check_args.c
 
 /* actions.c */
 void	eat(t_philo *philo); // actions.c
-void	take_forks(t_philo *philo); // actions.c
+int		take_forks(t_philo *philo); // actions.c
 int		close_simulation(t_data *data); // actions.c
 
 /* routine.c */
